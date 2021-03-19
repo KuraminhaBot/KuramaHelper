@@ -3,10 +3,10 @@ const { checkEmoji } = require('../utils/checkEmoji.js')
 
 module.exports = {
   run: async (client) => {
-    
+
     var channels = ["769900869612994560", "702150853628526662"]
     
-    const job = new CronJob("* */1 * * *", async () => {
+    const job = new CronJob("* 50 * * * *", async () => {
       for (const id in channels) {
         
         let channel = client.channels.cache.get(channels[id])
