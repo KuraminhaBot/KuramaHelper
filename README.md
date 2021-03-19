@@ -1,4 +1,4 @@
-<h1 align="center">🙋‍♀️ Loritta Helper 🙋‍♀️</h1>
+<h1 align="center">🦊 Kurama Helper 🦊</h1>
 <img height="250" src="https://media.discordapp.net/attachments/702463514467368980/822457695529467935/kurama_lurk_compled.png" align="left">
 
 O bot que responde automaticamente **QUASE** todas as perguntas sobre o Kuraminha em seu servidor de suporte.
@@ -30,9 +30,9 @@ Você pode adicionar novas respostas ao Kurama Helper seguindo estas etapas:
 
 ```js
 var patterns = [
-    "como",
-    "ganha|obtem|receber",
-    "kurama(-| )coins|moedas|dinheiro"
+	"como",
+	"ganha|obtem|receber",
+	"kurama(-| )coins|moedas|dinheiro"
 ]
 ```
 
@@ -41,7 +41,7 @@ var patterns = [
 ```js
 async run(client, message) {
     message.build(
-        message.kuramaReply("você pode ganhar **__Kurama Coins__**.... Dormindo! Ksksks brincadeirinha! Existe uma maneira muito simples de ganhar **__Kurama Coins__**, apenas coletando daily! E você pode gastar por exemplo, apostando `^-^`!", "737016551433043998"),
+        message.kuramaReply("você pode ganhar **__Kurama Coins__**.... Dormindo! Ksksks brincadeirinha! Existe uma maneira muito simples de ganhar **__Kurama Coins__**, apenas coletando daily! E você pode gastar por exemplo, apostando `^-^`!", "737016551433043998")
     )
 }
 ```
