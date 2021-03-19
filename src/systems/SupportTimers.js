@@ -4,9 +4,10 @@ const { checkEmoji } = require('../utils/checkEmoji.js')
 module.exports = {
   run: async (client) => {
     
-    var channels = ["769900869612994560", "702150853628526662"]
-
-    const job = new CronJob('0 0 */1 * * *', async () => {
+    //var channels = ["769900869612994560", "702150853628526662"]
+    var channels = ["769897341121069097", "702149521999790119"]
+    
+    const job = new CronJob("* */1 * * *", async () => {
       for (const id in channels) {
         
         let channel = client.channels.cache.get(channels[id])
@@ -36,7 +37,7 @@ module.exports = {
           `{ "option": { "allowedMentions": { "roles": ["769894020654563378"] } } }`
         )
       }
-    })
+    }, null, true, 'America/Sao_Paulo')
     
     job.start()
   },
