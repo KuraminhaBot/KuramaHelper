@@ -6,7 +6,7 @@ module.exports = {
 
     var channels = ["769900869612994560", "702150853628526662"]
     
-    const job = new CronJob("* 50 * * * *", async () => {
+    const job = new CronJob('0 */30 * * * *', async () => {
       for (const id in channels) {
         
         let channel = client.channels.cache.get(channels[id])
