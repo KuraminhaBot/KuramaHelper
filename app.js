@@ -23,7 +23,7 @@ const kurama = new kuramaClient(client)
   kurama.loadEvents()
   kurama.loadCommands()
   kurama.loadResponses()
-//  kurama.loadSystem()
+  kurama.loadSystem()
 
 client.on("error", (e) => console.error(e));
 
