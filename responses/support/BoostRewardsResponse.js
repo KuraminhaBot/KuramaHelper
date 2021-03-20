@@ -3,7 +3,7 @@ const ServerResponse = require("../../src/structures/serverResponses")
 var patterns = [
   "ganha|o?( )que|recebe",
   "dando|(se )?(der|dar)",
-  "bo{2}st",
+  "(nitro |)bo{2}st",
   "aqui|"
 ]
 
@@ -14,7 +14,7 @@ module.exports = class BoostRewardsResponse extends ServerResponse {
       priority: 0,
       ignoreDevs: false,
     })
-	}
+  }
   
   async run(client, message) {
     

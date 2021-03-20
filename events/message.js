@@ -17,13 +17,14 @@ module.exports = async (client, message) => {
   if (message.guild.id == process.env.SUPPORT_GUILD) type = "support"
   if (message.guild.id == process.env.COMMUNITY_GUILD) type = "community"
 
-  message.guild.type = type
+  message.guild.type = type, client.owner = client.users.cache.get("361977144445763585"), client.guild = client.guilds.cache.get("417061847489839106"), client.support = client.guilds.cache.get("769892417025212497"), client.prefix = process.env.PREFIX
+
   
   if (type && !message.content.toLowerCase().startsWith(prefix)) {
     
     var responsesOlder = client.responses.filter(r => r.guilds.includes(type))    
     
-    responsesOlder.forEach(response => {
+    responsesOlder.forEach(response => {      
       if (!client.utils.ALLOWED_CHANNELS.includes(message.channel.id)) return;
 
       if (response.config.regex.test(message.content)) {
@@ -41,8 +42,8 @@ module.exports = async (client, message) => {
   const command = args.shift().toLowerCase()
   let cmd = client.commands.get(command)
   
-  client.owner = client.users.cache.get("361977144445763585"), client.guild = client.guilds.cache.get("417061847489839106"), client.support = client.guilds.cache.get("769892417025212497"), client.prefix = process.env.PREFIX, message.command = cmd, message.cmd = cmd
-  
+  message.command = cmd, message.cmd = cmd
+    
   if (cmd.conf.onlyguilds && !message.guild) return message.channel.send("você não pode usar este comando em mensagens privadas!", "813179670270967819")
   try {
     cmd.run(client, message, args, cmd)
