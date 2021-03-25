@@ -19,19 +19,25 @@ module.exports = {
       var targedGuild = client.guilds.cache.get(client.utils.KURAMA_GUILDS[guild])
       
       if (!targedGuild.getMember(message.author)) return;
-            
-      if (Object.keys(roleRemap[message.guild.id]).some(r => targedGuild.getMember(message.author).roles.cache.has(r))) {
-        continue;
-      }
       
       if (Object.values(roleRemap[message.guild.id]).some(r=> targedGuild.getMember(message.author).roles.cache.has(r))) {
         for (const id in Object.keys(roleRemap[message.guild.id])) {
-          if (message.member.roles.cache.has(Object.keys(roleRemap[message.guild.id])[id])) {
+          
+          var role = message.guild.roles.cache.get(Object.keys(roleRemap[message.guild.id])[id])
+          
+          if (!targedGuild.getMember(message.author).roles.cache.has(Object.values(roleRemap[message.guild.id])[id])) {
+            if (message.member.roles.cache.has(Object.keys(roleRemap[message.guild.id])[id])) {
+              console.log("[Roles Synchronization]", `${message.guild.name} | Removi o cargo ${role.name} em ${message.author.tag}!`)
+              await message.member.roles.remove(Object.keys(roleRemap[message.guild.id])[id], `Roles Synchronization: Não tinha o cargo em ${targedGuild.name}`)
+              continue;
+            }
             continue;
           }
           
-          var role = message.guild.roles.cache.get(Object.keys(roleRemap[message.guild.id])[id]) 
-          
+          if (message.member.roles.cache.has(Object.keys(roleRemap[message.guild.id])[id])) {
+            continue;
+          }
+                    
           console.log("[Roles Synchronization]", `${message.guild.name} | Setei o cargo ${role.name} em ${message.author.tag}!`)
           message.member.roles.add(Object.keys(roleRemap[message.guild.id])[id], `Roles Synchronization: Tinha o cargo em ${targedGuild.name}`)
         }

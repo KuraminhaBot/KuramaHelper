@@ -7,7 +7,7 @@ module.exports = class ServerResponse {
 			name: options.name || null,
       priority: options.priority || 0,
       ignoreDevs: options.OnlyDevs || false,
-      regex: new RegExp(this.patterns.map(p => `(${p})`).join(" ?"), "i"),
+      regex: new RegExp(this.patterns.map(p => `(${p})`).join(" ?"), "ig"),
 		}
 	}
   
