@@ -22,7 +22,7 @@ module.exports = class BoostRewardsResponse extends ServerResponse {
     
     message.build(
       message.kuramaReply(`ao dar boost aqui você pode claimar as recompensas faladas no chat <#${channelID}>.\n`, "698156610123464744"),
-      message.kuramaReply("Após dar boost você pode usar o comando `d!vipBoost` para pegar as vantagens em 1 servidor de sua escolha!\n", "799373211141800036", false),
+      message.kuramaReply("Após dar boost você pode usar o comando `d!vipBoost` para pegar as vantagens em 1 servidor de sua escolha!\n", "826430254084128829", false),
       message.kuramaReply("`Observação: Você perde suas vantagens após terminar o seu Server Boosting.`", false),
       `{ "option": { "files": ["https://media1.tenor.com/images/31ad5196ff2418d0d67b230f60c5e570/tenor.gif"] } }`
     )

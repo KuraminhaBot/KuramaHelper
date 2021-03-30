@@ -4,7 +4,7 @@ const { checkEmoji } = require('../utils/checkEmoji.js')
 module.exports = {
   run: async (client) => {
 
-    var channels = ["769900869612994560", "702150853628526662"]
+    var channels = ["769900869612994560", "826348899064348722"]
     
     const job = new CronJob('0 */50 * * * *', async () => {
       for (const id in channels) {
@@ -30,9 +30,9 @@ module.exports = {
         if (type == "community") supportRole = client.utils.DARK_SUPPORT_ID, newsChannel = client.utils.DARK_ANNOUNCEMENTS_ID, context = "em algum canal de dúvidas frequentes"
         
         channel.build(
-          `${checkEmoji(client, "711661099115610232")} **| LEIA ANTES DE PERGUNTAR!**`,
-          `${checkEmoji(client, "742104629265039510")} **| Se for uma dúvida:** Veja se a resposta da sua pergunta está ${context}! Caso não esteja lá, envie a sua pergunta aqui e, na mensagem, mencione o <@&${supportRole}>, nós iremos tentar te ajudar o mais breve possível!`,
-          `${checkEmoji(client, "799373211141800036")} **| Se você irá perguntar se algo foi alterado/adicionado/removido:** Veja o canal <#${newsChannel}> para saber!`,
+          `${checkEmoji(client, "826414452969963520")} **| LEIA ANTES DE PERGUNTAR!**`,
+          `${checkEmoji(client, "826430829181141062")} **| Se for uma dúvida:** Veja se a resposta da sua pergunta está ${context}! Caso não esteja lá, envie a sua pergunta aqui e, na mensagem, mencione o <@&${supportRole}>, nós iremos tentar te ajudar o mais breve possível!`,
+          `${checkEmoji(client, "826430254084128829")} **| Se você irá perguntar se algo foi alterado/adicionado/removido:** Veja o canal <#${newsChannel}> para saber!`,
           `{ "option": { "allowedMentions": { "roles": ["769894020654563378"] } } }`
         )
           

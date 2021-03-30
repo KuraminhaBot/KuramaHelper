@@ -24,7 +24,7 @@ module.exports = class DoingBlackCloverServerResponse extends ServerResponse {
     var channelID = message.guild.type == "community" ? client.utils.COMMUNITY_SERVER_BOOST_ID : client.utils.SUPPORT_SERVER_BOOST_ID
     
     message.build(
-      message.kuramaReply(`estamos fazendo sim, o nosso projeto se chama **__Dark Clover__**, se você estiver interessado nele, você pode dar **boost (<#${channelID}>)** aqui ou comprar um vip para ter acesso aos **Chat de Spoilers**.`, "754855964103933972"),
+      message.kuramaReply(`estamos fazendo sim, o nosso projeto se chama **__Dark Clover__**, se você estiver interessado nele, você pode dar **boost (<#${channelID}>)** aqui ou comprar um vip para ter acesso aos **Chat de Spoilers**.`, "826435905769308240"),
       `{ "option": { "files": ["https://i.imgur.com/Y26wVdm.gif"] } }`
     )
   }
