@@ -1,4 +1,5 @@
 const { MessageEmbed, MessageAttachment } = require('discord.js');
+const Util = require('../../src/utils/Util.js');
 const Discord = require('discord.js');
 const fs = require('fs')
 
@@ -20,7 +21,7 @@ module.exports = {
         } catch (err) {
 
            let embed = new MessageEmbed()
-            .setTitle("<:kurama_sunglasses:711660710014484540> • Kurama Canary - Eval")
+            .setTitle("<:kurama_sunglasses:826413802102849597> • Kurama Canary - Eval")
             .setColor("RED")
             .setDescription('<:errado:639895787983339531> • Ocorreu um erro durante o eval.\n```js' + err + "```");
 

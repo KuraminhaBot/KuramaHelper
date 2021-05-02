@@ -6,10 +6,10 @@ module.exports = async (client, message) => {
   if (message.author.bot || message.author.system) return;
   
   if (message.content === `${prefix}restart` && message.author.id === '361977144445763585') {
-    await message.channel.send(`<:kurama_yay:710127641230966824> • Reiniciando! Recarregando todos os meus comandos.`)
+    await message.ffSend(`Reiniciando! Recarregando todos os meus comandos.`, "826413426100011028")
       .then(message => client.destroy()).catch(err => console.log(err))
       .then(() => client.login(process.env.AUTH_TOKEN)).catch(err => console.log(err))
-      .then(() => message.channel.send(`<a:kurama_pat_animated:711661099115610232> • Voltei! Iniciado com ${client.users.cache.size} usuários, em ${client.channels.cache.size} canais, em ${client.guilds.cache.size} servidores.`)).catch(err => console.log(err));
+      .then(() => message.ffSend(`Voltei! Iniciado com ${client.users.cache.size} usuários, em ${client.channels.cache.size} canais, em ${client.guilds.cache.size} servidores.`, "826414452969963520")).catch(err => console.log(err));
     console.log('[RESTART] Desconectando - Processo forçado pelo dono.');
     process.exit();
   }
@@ -41,6 +41,8 @@ module.exports = async (client, message) => {
   const args = message.content.slice(prefix.length).trim().split(/ +/g)
   const command = args.shift().toLowerCase()
   let cmd = client.commands.get(command)
+  
+  if (!cmd) return;
   
   message.command = cmd, message.cmd = cmd
     

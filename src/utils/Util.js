@@ -25,7 +25,8 @@ module.exports = class Util {
     return array;
   }
   
-  static async verifyArrayAndRemove(array, arrayRemove) {
+  static async verifyArrayAndRemove(original, arrayRemove) {
+    var array = [...original]
     for (const item in arrayRemove) {
       if (!array.includes(arrayRemove[item])) {
         continue;
@@ -63,7 +64,7 @@ module.exports = class Util {
   }
   
   static getPlaceholders(item, message, user, mod) {
-    var guild = message.guild ? message.guild : null, completeString = item
+    var guild = message.guild ? message.guild : null, completeString = item, channel = message.channel
     if (typeof item === "object") completeString = JSON.stringify(item)
       
     completeString = completeString
@@ -72,10 +73,13 @@ module.exports = class Util {
       .replace(new RegExp("{user\.tag}", "ig"), `${user.tag}`)
       .replace(new RegExp("{user\.avatar}", "ig"), `${user.getAvatar()}`)
       .replace(new RegExp("{user\.id}", "ig"), `${user.id}`)
-      .replace(new RegExp(("{user?(\.username)}"), "ig"), `${user.username}`)
+      .replace(new RegExp(("{user(\.username)?}"), "ig"), `${user.username}`)
 
     if (message.guild) {
       completeString = completeString
+        .replace(new RegExp("{#channel}", "ig"), `${channel.toString()}`)
+        .replace(new RegExp("{channel\.id}", "ig"), `${channel.id}`)
+        .replace(new RegExp("{channel(\.name)?}", "ig"), `${channel.name}`)
         .replace(new RegExp("{guild}", "ig"), `${guild.name}`)
         .replace(new RegExp("{guild\.id}", "ig"), `${guild.id}`)
         .replace(new RegExp("{guild\.size}", "ig"), `${guild.memberCount}`)
@@ -91,7 +95,7 @@ module.exports = class Util {
         .replace(new RegExp("{staff\.tag}", "ig"), `${message.author.tag}`)
         .replace(new RegExp("{staff\.avatar}", "ig"), `${message.author.getAvatar()}`)
         .replace(new RegExp("{staff\.id}", "ig"), `${message.author.id}`)
-        .replace(new RegExp(("{staff?(\.username)}"), "i"), `${message.author.username}`)
+        .replace(new RegExp(("{staff(\.username)?}"), "i"), `${message.author.username}`)
     }
     
     if (typeof item === "object") return JSON.parse(completeString)
