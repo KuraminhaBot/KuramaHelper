@@ -13,10 +13,11 @@ module.exports = class NarutoRankingsResponse extends ServerResponse {
       name: "NarutoRankingsResponse",
       priority: 0,
       ignoreDevs: false,
+      disable: true
     })
 	}
-  
-  async run(client, message) {
+
+  run(client, message) {
     message.build(
       message.kuramaReply("Com dúvidas sobre o Naruto Dark? Pegue o cargo <@&643566203503378454> no <#702147947978293310> para obter acesso ao canal de Dúvidas Frequentes.", "828360658159927316"),
       message.kuramaReply("Após obter o cargo você pode tirar as dúvidas de rankings neste canal aqui <#716065542741426216>.", "779445435085357116", false),

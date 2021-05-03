@@ -4,6 +4,7 @@ module.exports = {
     
     if (!client.utils.ALLOWED_CHANNELS.includes(message.channel.id)) return;
     if (message.author.isStaff() || message.author.isDev()) return;
+    if (message.mentions.users.size == 0) return;
     
     var mentionedUsers = [...message.mentions.users.array()], validUsers = []
     let userWarned = false
@@ -40,7 +41,8 @@ module.exports = {
     }
   },
   
-  "config": {
-    "events": ["message"]
+  config: {
+    "events": ["message"],
+    "disable": true
   }
 }

@@ -21,19 +21,21 @@ module.exports = async (client, message) => {
 
   
   if (type && !message.content.toLowerCase().startsWith(prefix)) {
+    if (!client.utils.ALLOWED_CHANNELS.includes(message.channel.id)) return;
     
-    var responsesOlder = client.responses.filter(r => r.guilds.includes(type))    
+    var responsesOlder = client.responses.filter(r => r.guilds.includes(type))
+    var response = responsesOlder.find(response => response.config.regex.test(message.content))
     
-    responsesOlder.forEach(response => {      
-      if (!client.utils.ALLOWED_CHANNELS.includes(message.channel.id)) return;
-
-      if (response.config.regex.test(message.content)) {
-        if (message.author.isDev() && response.config.ignoreDevs) return;
-        if (message.author.isStaff() && response.config.ignoreStaff) return;
-        console.log('[ReponseLog]', `| [User] ${message.author.tag} - (${message.author.id}) run ${response.config.name}.js [Guild] ${message.guild.name} - (${message.guild.id}) - ${message.channel.name} (${message.channel.id})`)
-        return response.run(client, message)
-      }
-    })
+    if (!response) return;
+    if (message.author.isDev() && response.config.ignoreDevs) return;
+    if (message.author.isStaff() && response.config.ignoreStaff) return;
+    
+    console.log('[ReponseLog]', `| [User] ${message.author.tag} - (${message.author.id}) run ${response.config.name}.js [Guild] ${message.guild.name} - (${message.guild.id}) - ${message.channel.name} (${message.channel.id})`)
+    try {
+      response.run(client, message)
+    } catch(err) {
+      return message.ffSend(`Alguma coisa deu extremamente errada ao executar este comando... Desculpe pela inconveniência. \`${err}\``, "813179670270967819");
+    }
   }
   
   if (message.content.toLowerCase().indexOf(prefix) !== 0) return
@@ -42,7 +44,7 @@ module.exports = async (client, message) => {
   const command = args.shift().toLowerCase()
   let cmd = client.commands.get(command)
   
-  if (!cmd) return;
+  if (!cmd) return
   
   message.command = cmd, message.cmd = cmd
     

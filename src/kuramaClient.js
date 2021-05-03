@@ -52,6 +52,8 @@ module.exports = class kuramaClient{
         try {
           const props = new (require(`${index}/${folder}/${f}`))(this);
           if (f.split(".").slice(-1)[0] !== "js") return;
+          if (props.config.disable) return;
+          
           console.log(`[RESPONSE] Carregando ${props.config.name}.js`);
           
           if (props.init) props.init(this.client);

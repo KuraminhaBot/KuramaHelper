@@ -19,7 +19,7 @@ module.exports.stackFAQ = async (message, title, channelID) => {
     var embeds = []
     
     let activeEmbed = new MessageEmbed()
-      .setTitle(`<:kurama_coffee:728314039402234399> ${title}`)
+      .setTitle(`<:kurama_coffee:826415473775869962> ${title}`)
       .setColor(`#FF6E02`)
     
     var newText = []

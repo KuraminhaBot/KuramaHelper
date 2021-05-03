@@ -8,6 +8,7 @@ module.exports = class ServerResponse {
       priority: options.priority || 0,
       ignoreDevs: options.OnlyDevs || false,
       regex: new RegExp(this.patterns.map(p => `(${p})`).join(" ?"), "ig"),
+      disable: options.disable || false,
 		}
 	}
   
