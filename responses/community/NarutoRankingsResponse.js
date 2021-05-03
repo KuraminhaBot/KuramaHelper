@@ -12,8 +12,7 @@ module.exports = class NarutoRankingsResponse extends ServerResponse {
     super(client, patterns, {
       name: "NarutoRankingsResponse",
       priority: 0,
-      ignoreDevs: false,
-      disable: true
+      ignoreDevs: false
     })
 	}
 

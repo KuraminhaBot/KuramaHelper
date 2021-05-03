@@ -6,11 +6,10 @@ const kuramaClient = require('./src/kuramaClient.js')
 const client = new Discord.Client()
 
 const Constants = require("./src/utils/Constants")
-const Enmap = require('enmap');
 const cron = require('cron');
 
-client.commands = new Enmap()
-client.responses = new Enmap()
+client.commands = new Discord.Collection()
+client.responses = new Discord.Collection()
 client.startTime = Date.now()
 
 client.guild = client.guilds.cache.get("417061847489839106")

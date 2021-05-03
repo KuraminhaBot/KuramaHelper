@@ -42,7 +42,6 @@ module.exports = {
   },
   
   config: {
-    "events": ["message"],
-    "disable": true
+    "events": ["message"]
   }
 }

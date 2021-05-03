@@ -6,7 +6,7 @@ module.exports = class ServerResponse {
     this.config = {
 			name: options.name || null,
       priority: options.priority || 0,
-      ignoreDevs: options.OnlyDevs || false,
+      ignoreDevs: options.ignoreDevs || false,
       regex: new RegExp(this.patterns.map(p => `(${p})`).join(" ?"), "ig"),
       disable: options.disable || false,
 		}
