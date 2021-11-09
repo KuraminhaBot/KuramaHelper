@@ -26,8 +26,8 @@ module.exports = {
         
         var type = channel.guild.id == process.env.SUPPORT_GUILD ? "support" : "community"
                 
-        let supportRole = client.utils.KURAMA_SUPPORT_ID, newsChannel = client.utils.KURAMA_STATUS_ID, context = `no <#${client.utils.SUPPORT_FAQ_CHANNEL_ID}>`
-        if (type == "community") supportRole = client.utils.DARK_SUPPORT_ID, newsChannel = client.utils.DARK_ANNOUNCEMENTS_ID, context = "em algum canal de dúvidas frequentes"
+        let supportRole = client.constants.KURAMA_SUPPORT_ID, newsChannel = client.constants.KURAMA_STATUS_ID, context = `no <#${client.constants.SUPPORT_FAQ_CHANNEL_ID}>`
+        if (type == "community") supportRole = client.constants.DARK_SUPPORT_ID, newsChannel = client.constants.DARK_ANNOUNCEMENTS_ID, context = "em algum canal de dúvidas frequentes"
         
         channel.build(
           `${checkEmoji(client, "826414452969963520")} **| LEIA ANTES DE PERGUNTAR!**`,

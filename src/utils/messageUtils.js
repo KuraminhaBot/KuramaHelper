@@ -72,7 +72,7 @@ module.exports.stackFAQ = async (message, title, channelID) => {
       })
       
       embeds.forEach((it) => {
-        channel.send(it)
+        channel.send({embeds: [it]})
       })
     }
   }

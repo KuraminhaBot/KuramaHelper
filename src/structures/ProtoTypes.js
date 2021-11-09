@@ -1,88 +1,14 @@
-const { Util, APIMessage, Message, TextChannel, User, Guild, Client } = require("discord.js");
-const { checkEmoji } = require('../utils/checkEmoji.js')
+const { Message, MessageEmbed, User, Guild, Client, GuildMember } = require("discord.js");
+const { Interaction, Constants, Collection, UserManager } = require("discord.js");
+const { checkEmoji } = require('../utils/checkEmoji.js');
 const ClassUtil = require('../../src/utils/Util.js');
+const Replies = require('./Replies')
 
 module.exports = class ProtoTypes {
   static start() {
-    
-    //New Discord reply
-    Message.prototype.quote = async function(content, options) {
-      const reference = {
-        message_id:
-          (!!content && !options
-            ? typeof content === "object" && content.messageID
-            : options && options.messageID) || this.id,
-        message_channel: this.channel.id
-      };
 
-      const { data: parsed, files } = await APIMessage.create(
-        this,
-        content,
-        options
-      )
-        .resolveData()
-        .resolveFiles();
-      
-      this.client.api.channels[this.channel.id].messages.post({
-        data: { ...parsed, message_reference: reference },
-        files
-      }).catch(err => this.channel.send(content, options))
-    };
-    
-    //KuramaReply
-    Message.prototype.ffReply = async function(content, emoji = "🔹", mentionUser, data={}) {
-      if (mentionUser == undefined || mentionUser.toString() !== "false" && !mentionUser) mentionUser = true
-      if (mentionUser && mentionUser.toString() !== ("true"||"false")) data= mentionUser, mentionUser=true;
-      if (emoji.toString() === "true" || emoji.toString() === "false") mentionUser=emoji, emoji = "🔹"
-      if (typeof emoji === "object") mentionUser=true, data=emoji, emoji= "🔹"
-      
-      var authorMention = mentionUser ? `<@!${this.author.id}> ` : ``      
-      let emojiParsed = /(%..%..%..(%..|)?)/ig.test(this.client.emojis.resolveIdentifier(emoji)) ? emoji : (isNaN(emoji) ? Util.parseEmoji(emoji).id : emoji)
-                  
-      if (isNaN(emoji)) {
-        if (data) return this.quote(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`, data);
-        this.quote(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`);
-      } else {
-        if (data) return this.quote(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`, data);
-        this.quote(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`);
-      }
-    }
-    
-    //Kurama Message
-    Message.prototype.ffSend = async function(content, emoji = "🔹", mentionUser= true, data={}) {
-      if (mentionUser == undefined || mentionUser.toString() !== "false" && !mentionUser) mentionUser = true
-      if (mentionUser && mentionUser.toString() !== ("true"||"false")) data= mentionUser, mentionUser=true;
-      if (emoji.toString() === "true" || emoji.toString() === "false") mentionUser=emoji, emoji = "🔹"
-      if (typeof emoji === "object") mentionUser=true, data=emoji, emoji= "🔹"
-      
-      var authorMention = mentionUser ? `<@!${this.author.id}> ` : ``
-      let emojiParsed = /(%..%..%..(%..|)?)/ig.test(this.client.emojis.resolveIdentifier(emoji)) ? emoji : (isNaN(emoji) ? Util.parseEmoji(emoji).id : emoji)
-
-      if (isNaN(emoji)) {
-        if (data) return this.channel.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`, data);
-        this.channel.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`);
-      } else {
-        if (data) return this.channel.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`, data);
-        this.channel.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`);
-      }
-    }
-    
-    TextChannel.prototype.ffSend = async function(content, emoji = "🔹", mentionUser=false, data={}) {
-      if (typeof mentionUser === "string") mentionUser= this.client.users.cache.get(mentionUser)
-      if (!isNaN(emoji) && this.client.emojis.cache.get(emoji) === undefined) mentionUser=this.client.users.cache.get(emoji), emoji = "🔹"
-      if (typeof emoji === "object") mentionUser=false, data=emoji, emoji= "🔹"
-      
-      var authorMention = mentionUser ? `${mentionUser.toString()} ` : ``
-      let emojiParsed = /(%..%..%..(%..|)?)/ig.test(this.client.emojis.resolveIdentifier(emoji)) ? emoji : (isNaN(emoji) ? Util.parseEmoji(emoji).id : emoji)
-
-      if (isNaN(emoji)) {
-        if (data) return this.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`, data);
-        this.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`);
-      } else {
-        if (data) return this.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`, data);
-        this.send(`${checkEmoji(this.client, emojiParsed)} **|** ${authorMention}${content}`);
-      }
-    }
+    //Load all replies
+    Replies.start()
     
     //OnlyDevs
     User.prototype.isDev = function() {
@@ -124,34 +50,6 @@ module.exports = class ProtoTypes {
       return 
     }
     
-    Message.prototype.kuramaReply = function(content, emoji= "🔹", mentionUser = true) {
-      if (typeof emoji === "boolean") mentionUser= emoji, emoji= "🔹"
-      var user = mentionUser ? `${this.author.toString()} ` : ""
-      return `${checkEmoji(this.client, emoji)} **|** ${user}${content}`
-    }
-    
-    Message.prototype.build = function(...object) {
-      let messageContent = [], config = null
-
-      object.forEach(it => {
-        if (ClassUtil.isJSON(it)) config = JSON.parse(it).option
-        else messageContent.push(it)
-      })
-            
-      return this.channel.send(messageContent.join("\n"), config)
-    }
-    
-    TextChannel.prototype.build = function(...object) {
-      let messageContent = [], config = null
-
-      object.forEach(it => {
-        if (ClassUtil.isJSON(it)) config = JSON.parse(it).option
-        else messageContent.push(it)
-      })
-            
-      return this.send(messageContent.join("\n"), config)
-    }
-    
     Guild.prototype.getMember = function(User) {
       let guildMemberResolvable
       if (!isNaN(User)) guildMemberResolvable = User.toString()
@@ -168,6 +66,57 @@ module.exports = class ProtoTypes {
         
         return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}${format}`
       }
+    }
+
+    MessageEmbed.prototype.addField = function (name, value, inline) {
+      if (typeof value !== "string") value = `${value}`
+      
+      return this.addFields({ name, value, inline });
+    }
+
+    Collection.prototype.array = function() {
+      return [...this.values()]
+    }
+
+    Interaction.prototype.isSubCommand = function() {
+      return this.options._subcommand ? true : false
+    }
+    
+    Interaction.prototype.isSlashCommand = function() {
+      return this.type === Constants.InteractionTypes[2] && typeof this.targetId === 'undefined';
+    }
+    
+    Interaction.prototype.isCommand = function() {
+      return this.type === Constants.InteractionTypes[2];
+    }
+
+    Interaction.prototype.loadTarget = async function() {
+      try {
+        switch (this.targetType) {
+          case 'USER':
+            await this.client.users.fetch(this.targetId)
+            
+            this.target = this.client.users.cache.get(this.targetId)
+            break;
+          case 'MESSAGE':
+            this.target = await this.client.channels.cache.get(this.channelId).messages.fetch(this.targetId)
+            break;
+        }
+        
+        return true;
+      } catch(err) {
+        return new Error(`[NELLY-UTIL] This target as not been fetched!\n${err}`)
+      }
+    } 
+    
+    UserManager.prototype.add = function (data, cache = true, { id, extras = [] } = {}) {
+      const existing = this.cache.get(id ?? data.id);
+      if (cache) existing?._patch(data);
+      if (existing) return existing;
+      
+      const entry = this.holds ? new this.holds(this.client, data, ...extras) : data;
+      if (cache) this.cache.set(id ?? entry.id, entry);
+      return entry;
     }
   }
 }

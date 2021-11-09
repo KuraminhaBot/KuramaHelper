@@ -1,7 +1,7 @@
 
 module.exports = {
   run: async (client, message) => {
-    if (!client.utils.KURAMA_GUILDS.includes(message.guild.id)) return
+    if (!client.constants.KURAMA_GUILDS.includes(message.guild.id)) return
     
     var roleRemap = {
       "417061847489839106": {
@@ -14,9 +14,9 @@ module.exports = {
       }
     }
     
-    for (const guild in client.utils.KURAMA_GUILDS) {
+    for (const guild in client.constants.KURAMA_GUILDS) {
       
-      var targedGuild = client.guilds.cache.get(client.utils.KURAMA_GUILDS[guild])
+      var targedGuild = client.guilds.cache.get(client.constants.KURAMA_GUILDS[guild])
       
       if (!targedGuild.getMember(message.author)) return;
       
@@ -46,6 +46,6 @@ module.exports = {
   },
   
   config: {
-    "events": ["message"]
+    "events": ["messageCreate"]
   }
 }

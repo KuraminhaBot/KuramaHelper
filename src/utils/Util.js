@@ -24,6 +24,12 @@ module.exports = class Util {
     array.splice(index, 1)
     return array;
   }
+
+  static chunk(array, chunkSize) {
+    let newArray = [...array]
+    newArray.forEach((e, i) => newArray.splice(i, 0, newArray.splice(i, chunkSize)));
+    return newArray;
+  }
   
   static async verifyArrayAndRemove(original, arrayRemove) {
     var array = [...original]
@@ -101,5 +107,92 @@ module.exports = class Util {
     if (typeof item === "object") return JSON.parse(completeString)
     
     return completeString
+  }
+
+  static rgbToHex(r, g, b) {
+    return '#' + ((b | g << 8 | r << 16) | 1 << 24).toString(16).slice(1).toUpperCase();
+  }
+  
+  static fancySplit(str, max) {
+    if (str.length < max) return str;
+    
+    if (str.endsWith("`")) return `${str.substring(0, max+1)}\`...`
+    
+    return `${str.substring(0, max)}...`
+  }
+  
+  static timeToMilliseconds(time) {
+    time = time.replace(/(( )?se(c|g)und(os|o|s))/ig, "s")
+    time = time.replace(/(( )?minut(os|o|e|es))/ig, "m")
+    time = time.replace(/(( )?ho(ras|ra|urs|ur))/ig, "h")
+    time = time.replace(/(( )?d(ias|ia|ays|ay))/ig, "d")    
+      
+    const timeUnits = time.replace(/[\d\s]/g, _ => '').toLowerCase().split('')
+    const formats = ['d', 'h', 'm', 's']
+    
+    const isValid =  timeUnits.length === new Set(timeUnits).size && timeUnits.every((u, i, a) => formats.includes(u) && formats.indexOf(a[i-1]) < formats.indexOf(u))
+    if (!isValid) return null
+    
+    const formatted = time.replace(/([a-zA-Z])/g, '$1 ').toLowerCase().trim().split(' ').filter(f => !!f)
+    if (formatted.some(e => !/[0-9]/.test(e))) return null
+    
+    const invalid = { h:24, m:60, s:60 }
+    for (const f of formatted) {
+      const value = f.replace(/\D/g, '')
+      const unit = f.replace(/\d/gi, '')
+      
+      if (value >= invalid[unit]) return null
+    }
+    
+    const convertions = { d:86400000, h:3600000, m:60000, s:1000 }
+    return formatted.reduce((acc, curr, i, a) => acc + parseInt(curr.substring(0, curr.length-1))*convertions[curr[curr.length-1]], 0)
+  }
+  
+  static getTimestamp(idString) {
+    const moment = require('moment')
+    const id = BigInt.asUintN(64, idString);
+    const dateBits = Number(id >> 22n);
+
+    return (dateBits + 1420070400000);
+  }
+
+  static async translate(string, to, from="auto") {
+    const axios = require("axios");
+    
+    try {
+      return await axios.get(
+        encodeURI(`http://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${string}&ie=UTF-8&oe=UTF-8`), 
+        { responseType: 'array', headers: { 'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0" }}
+      )
+    } catch(err) {
+      return {error: err, err: err}
+    }
+  }
+  
+  static factorial(number) {
+    var value = number
+
+    for (var i = number;;) {
+      value-=1; i = i*value
+      
+      if (value == 1) {
+        return i
+        break;
+      }
+    }
+  }
+  
+  static shuffle(array) {
+    var currentIndex = array.length,  randomIndex;
+    
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    
+    return array;
   }
 }

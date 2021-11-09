@@ -7,7 +7,7 @@ Ele também responde questões relacionadas aos servidores da Rede Dark no servi
 
 ## 📅 Informação
 
-* Esses bot é privado, mas você pode [self-hostear](https://en.wikipedia.org/wiki/Self-hosting_(web_services)) ele no seu servidor.
+* Esse bot é privado, mas você pode [self-hostear](https://en.wikipedia.org/wiki/Self-hosting_(web_services)) ele no seu servidor.
 * Não consideraremos pull requests que não sejam úteis.
 * Se você quiser ajuda com a contribuição, pode perguntar para alguém com o cargo de "✔ » Anbus do Kurama" no servidor da [comunidade](https://discord.gg/rededark) ou [suporte](), eles sabem muito bem como ajudá-lo.
 
@@ -50,4 +50,4 @@ E então ao terminar esses processo, a sua resposta será adicionada automática
 
 ## 📊 License
 
-This repository is under the [AGPL-3.0](https://github.com/LorittaBot/LorittaHelper/blob/main/LICENSE) license.
+This repository is under the [AGPL-3.0](https://github.com/KuraminhaBot/KuramaHelper/blob/main/LICENSE) license.

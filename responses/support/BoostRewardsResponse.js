@@ -18,7 +18,7 @@ module.exports = class BoostRewardsResponse extends ServerResponse {
   
   async run(client, message) {
     
-    var channelID = message.guild.type == "community" ? client.utils.COMMUNITY_SERVER_BOOST_ID : client.utils.SUPPORT_SERVER_BOOST_ID
+    var channelID = message.guild.type == "community" ? client.constants.COMMUNITY_SERVER_BOOST_ID : client.constants.SUPPORT_SERVER_BOOST_ID
     
     message.build(
       message.kuramaReply(`ao dar boost aqui você pode claimar as recompensas faladas no chat <#${channelID}>.\n`, "698156610123464744"),

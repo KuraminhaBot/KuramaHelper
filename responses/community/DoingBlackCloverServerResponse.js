@@ -20,8 +20,7 @@ module.exports = class DoingBlackCloverServerResponse extends ServerResponse {
 	}
   
   async run(client, message) {
-    
-    var channelID = message.guild.type == "community" ? client.utils.COMMUNITY_SERVER_BOOST_ID : client.utils.SUPPORT_SERVER_BOOST_ID
+    var channelID = message.guild.type == "community" ? client.constants.COMMUNITY_SERVER_BOOST_ID : client.constants.SUPPORT_SERVER_BOOST_ID
     
     message.build(
       message.kuramaReply(`estamos fazendo sim, o nosso projeto se chama **__Dark Clover__**, se você estiver interessado nele, você pode dar **boost (<#${channelID}>)** aqui ou comprar um vip para ter acesso aos **Chat de Spoilers**.`, "826435905769308240"),

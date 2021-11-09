@@ -9,6 +9,6 @@ module.exports = {
   },
   
   config: {
-    "events": ["message", "messageDelete", "messageUpdate"]
+    "events": ["messageCreate", "messageDelete", "messageUpdate"]
   }
 }
