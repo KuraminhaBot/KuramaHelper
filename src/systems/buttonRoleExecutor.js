@@ -12,7 +12,13 @@ module.exports = {
     var baseMessages = RoleButtons.getMessages(classes)
     var itClass = RoleButtons.findClass(classes, interaction.customId)
     
-    if (!interaction.member.roles.cache.has(role)) {      
+    if (!interaction.member.roles.cache.has(role)) {
+      if (itClass.options?.onlyRoles) {
+        if (!interaction.member.roles.cache.some(it => itClass.options?.onlyRoles.includes(it.id))) {
+          return interaction.ffReply("Você não pode usar este menu, pois você não cumpre os requisitos de cargo", "813179670270967819", {ephemeral: true})
+        }
+      }
+      
       if (itClass.options?.removeOtherRole) {
         await itClass.buttons.filter(it => it.customId.split(":")[1] !== role).map(it => it.customId.split(":")[1]).forEach(it => {
           if (interaction.member.roles.cache.has(it)) {

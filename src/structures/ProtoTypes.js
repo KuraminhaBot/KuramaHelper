@@ -118,5 +118,21 @@ module.exports = class ProtoTypes {
       if (cache) this.cache.set(id ?? entry.id, entry);
       return entry;
     }
+
+    Guild.prototype.verifyAndGetMember = async function(User) {
+      var member = this.members.cache.get(User) || null;
+      
+      if (!member) {
+        try {
+          member = await this.members.fetch(User)
+
+          return member
+        } catch(err) {
+          return null;
+        }
+      }
+
+      return member
+    }
   }
 }

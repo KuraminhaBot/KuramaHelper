@@ -8,10 +8,10 @@ var patterns = [
   "kuram(inha|a)|"
 ]
 
-module.exports = class howToChangePrefixResponse extends ServerResponse {
+module.exports = class HowToChangePrefixResponse extends ServerResponse {
   constructor(client) {
     super(client, patterns, {
-      name: "howToChangePrefixResponse",
+      name: "HowToChangePrefixResponse",
       priority: 0,
       ignoreDevs: false,
     })

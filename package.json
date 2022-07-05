@@ -4,6 +4,7 @@
   "description": "Um bot para ajudar os servidores do Kuraminha em diversas funções!",
   "main": "app.js",
   "dependencies": {
+    "discord-logs": "^2.0.1",
     "discord.js": "^13.2.0",
     "dotenv": "^8.2.0",
     "fs": "^0.0.2",

@@ -147,12 +147,15 @@ module.exports = class kuramaClient{
     console.log("[SYSTEMS]", `Carregando o total de ${sytFiles.length} eventos`);
     sytFiles.forEach(f => {
       const system = require(`${index}/${f}`);
-      
       if (system.config.disable) return;
 
       if (system.config.events) {
         system.config.events.forEach((eventName) => {
-          this.client.on(eventName, (...args) => system.run(this.client, ...args));
+          this.client.on(eventName, (...args) => {
+            this.client.eventName = eventName
+            
+            system.run(this.client, ...args)
+          });
         })
       }
     });

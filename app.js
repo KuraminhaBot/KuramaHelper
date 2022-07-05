@@ -19,11 +19,13 @@ client.support = client.guilds.cache.get("769892417025212497")
 client.prefix = process.env.PREFIX
 
 client.constants = Constants
+require('discord-logs')(client);
 
 const kurama = new kuramaClient(client)
   kurama.loadEvents()
   kurama.loadCommands()
   kurama.loadSlashs()
+  kurama.loadSubCommands()
   kurama.loadResponses()
   kurama.loadSystem()
 
