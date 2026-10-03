@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../../src/utils/KuramaEmojis');
 const ServerResponse = require("../../src/structures/serverResponses")
 
 var patterns = [
@@ -19,8 +20,8 @@ module.exports = class HowToChangePrefixResponse extends ServerResponse {
   
   run(client, message) {
     message.build(
-      message.kuramaReply("alterar o meu prefix no seu servidor é muitooo fácil, veja comigo.", "826415473969070090"),
-      message.kuramaReply("Você pode alterar o meu prefix no seu servidor utilizando o comando `d!setPrefix <prefix>`.", "826415473775869962", false)
+      message.kuramaReply("alterar o meu prefix no seu servidor é muitooo fácil, veja comigo.", kuramaEmojis.id('kurama_thumbsup')),
+      message.kuramaReply("Você pode alterar o meu prefix no seu servidor utilizando o comando `d!setPrefix <prefix>`.", kuramaEmojis.id('kurama_coffee'), false)
     )
   }
 }

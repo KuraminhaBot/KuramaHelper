@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../utils/KuramaEmojis');
 module.exports = {
   run: async (client, message) => {
     const guild = message.guild
@@ -20,7 +21,7 @@ module.exports = {
       if (/((conversa|vem|vamos|pode?( vir|)|libera|coisa)(r|)) ?(|.*) (pv|dm|privado)/ig.test(message.content)) {
         userWarned= true
         return message.build(
-            message.kuramaReply("**Não mencione pessoas da equipe!** As vezes elas podem estar ocupadas... vai se ela está cagando e você aí, incomodando ela...", "826416082012733460"),
+            message.kuramaReply("**Não mencione pessoas da equipe!** As vezes elas podem estar ocupadas... vai se ela está cagando e você aí, incomodando ela...", kuramaEmojis.id('kurama_rage_2')),
             message.kuramaReply("**Não damos suporte via DM!** Não insista para que algum staff te atenda via mensagem direta, seja direto com a pessoa.", false)
           )
       }

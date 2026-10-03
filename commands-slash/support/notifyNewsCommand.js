@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../../src/utils/KuramaEmojis');
 const SlashCommand = require("../../src/structures/SlashCommand")
 const Discord = require('discord.js');
 
@@ -8,6 +9,7 @@ module.exports = class NotifyNewsCommand extends SlashCommand {
       description: 'Fique ligado as novidades que estão por vir no servidor e no Kuraminha',
       subCommand: true,
       command: "notificar",
+      type: 'SUB_COMMAND',
       devGuild: true
     })
   }
@@ -20,12 +22,12 @@ module.exports = class NotifyNewsCommand extends SlashCommand {
       member.roles.remove(notifyRole)
       interaction.ffReply(
         "Sério mesmo que você não quer mais receber minhas incríveis novidades? E eu pensava que nós eramos amigos...",
-        "826430408173813820",
+        kuramaEmojis.id('kurama_sob'),
         {ephemeral: true}
       )
     } else {
       member.roles.add(notifyRole)
-      interaction.ffReply("Agora você irá ser notificado sobre as minhas novidades!", "826414452969963520", {ephemeral: true})
+      interaction.ffReply("Agora você irá ser notificado sobre as minhas novidades!", kuramaEmojis.id('kurama_pat_animated'), {ephemeral: true})
     }
   }
 }

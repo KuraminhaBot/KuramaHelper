@@ -1,3 +1,4 @@
+const kuramaEmojis = require('./KuramaEmojis');
 const Constants = require('./Constants.js')
 const Discord = require("discord.js")
 const Util = require('./Util.js')
@@ -28,7 +29,7 @@ module.exports = class RoleButtons {
     var CatPaiaço = this.buttonRole("893841428646596608", "891838748520751145", null)
     var RageEmote = this.buttonRole("893841973440548864", "853228348549103626", null)
     var Inemafoo = this.buttonRole("893841975000858654", "893843817285967942", null)
-    var KuramaReading = this.buttonRole("893841973771915326", "826430254084128829", null)
+    var KuramaReading = this.buttonRole("893841973771915326", kuramaEmojis.id('kurama_reading'), null)
     var WumpusBombado = this.buttonRole("893841982756098088", "854075784011841546", null)
     var Amogus = this.buttonRole("893843973741891636", "893848526147162162", null)
     var Floopa = this.buttonRole("893844221738516540", "852291994541096979", null)
@@ -57,22 +58,22 @@ module.exports = class RoleButtons {
     
     //=== [ CLASSES ] ===//
     var notifyRoles = this.buttonType(
-      notify, "Cargos de Notificação", null, "https://cdn.discordapp.com/emojis/826430829181141062.png", 
+      notify, "Cargos de Notificação", null, kuramaEmojis.text("[[emoji-url:kurama_lurk]]"), 
       "{emoji} **|** Ótimo! Agora com {role} você sempre será notificado quando houver algo novo!",
-      "<:kurama_sob:826430408173813820> **|** Eu não acredito! Achei que você queria ver as novidades, achei que éramos amigos .. Mas se precisar, fico aqui!",
+      kuramaEmojis.text("[[emoji:kurama_sob]] **|** Eu não acredito! Achei que você queria ver as novidades, achei que éramos amigos .. Mas se precisar, fico aqui!"),
     )
     
     var iconsRoles = this.buttonType(
       icons, "Ícones Personalizados", `Escolha um ícone personalizado que irá aparecer ao lado do seu nome aqui no servidor! O ícone personalizado irá substituir qualquer outro ícone que você possui!
       \n**Apenas disponível para usuários são <@&590517727190581266> no servidor ou <@&666410258889179167>!** Ficou interessado? Então [clique aqui](https://discord.com/channels/417061847489839106/826348023453843456/832945759199428609)! Ou, se preferir, seja mais ativo no servidor para chegar no nível 10!`,
-      "https://cdn.discordapp.com/emojis/826415473981390848.png", "{emoji} **|** Agora você está bem estiloso para conversar no chat! Sempre que quiser venha aqui trocar seu ícone!",
+      kuramaEmojis.text("[[emoji-url:kurama_boost]]"), "{emoji} **|** Agora você está bem estiloso para conversar no chat! Sempre que quiser venha aqui trocar seu ícone!",
       "<:role:860663445825388554> **|** Ícone removido com sucesso! Agora você pode escolher outro se quiser!", { removeOtherRole: true, onlyRoles: ["666410258889179167", "590517727190581266"]}
     )
     
     var gamesRoles = this.buttonType(
       games, "Jogos do Discord", `Inicie sua jornada em bots que colocamos aqui no nosso servidor, se aventure, se divirta e jogue com outros membros!
       \n**Cada cargo aqui libera canais novos** para que você interaja com os bots de diversão do servidor! Esses bots trazem consigo jogos com temáticas, jogabilidade e complexidades diferentes. O que acha de experimentar?`,
-      "https://cdn.discordapp.com/emojis/826423836965601301.png", "{emoji} **|** Agora você pode usufruir e se divertir com os canais que foram liberados!",       "<:kurama_sob:826430408173813820> **|** Talvez você não tenha gostado desse jogo! Ok, ok... Eu entendo, mas se você quiser jogar algo novamente eu estou aqui!",
+      kuramaEmojis.text("[[emoji-url:kurama_wow]]"), "{emoji} **|** Agora você pode usufruir e se divertir com os canais que foram liberados!",       kuramaEmojis.text("[[emoji:kurama_sob]] **|** Talvez você não tenha gostado desse jogo! Ok, ok... Eu entendo, mas se você quiser jogar algo novamente eu estou aqui!"),
     )
     
     return [
@@ -84,11 +85,11 @@ module.exports = class RoleButtons {
 
   static kuramaSupport() {
     //=== [ NOTIFY ROLES ] ===//
-    var news = this.buttonRole("769895515860631583", {name: "kurama_fine", id: "869310000768614400"}, "Notificar Novidades", {
+    var news = this.buttonRole("769895515860631583", {name: "kurama_fine", id: kuramaEmojis.id('kurama_fine')}, "Notificar Novidades", {
       description: "Fique ligadinho em todas as novidades do Kuraminha, para não perder nenhuma funcionalidade incrível!"
     })
     
-    var wip = this.buttonRole("935207422547595284", {name: "kurama_fixit", id: "826430206487166996"}, "Novidades WIP", {
+    var wip = this.buttonRole("935207422547595284", {name: "kurama_fixit", id: kuramaEmojis.id('kurama_fixit')}, "Novidades WIP", {
       description: "| Fique de olho nas mudanças que estão chegando ao Kuraminha antes de todo mundo!"
     })
 
@@ -96,9 +97,9 @@ module.exports = class RoleButtons {
     var notify = new Array(news, wip)    
     
     var notifyRoles = this.buttonType(
-      notify, "Cargos de Notificação", null, "https://cdn.discordapp.com/emojis/826430829181141062.png", 
+      notify, "Cargos de Notificação", null, kuramaEmojis.text("[[emoji-url:kurama_lurk]]"), 
       "{emoji} **|** Exelente! Agora com {role} você sempre será notificado sempre haver algo novo!",
-      "<:kurama_sob:826430408173813820> **|** Eu não acredito! Achei que você queria ver as novidades, achei que éramos amigos.. Mas se precisar, eu fico aqui!"
+      kuramaEmojis.text("[[emoji:kurama_sob]] **|** Eu não acredito! Achei que você queria ver as novidades, achei que éramos amigos.. Mas se precisar, eu fico aqui!")
     )
     
     return [
@@ -112,16 +113,16 @@ module.exports = class RoleButtons {
     var portuguese = this.buttonRole("854491481917489163", "🇺🇸", "English")
     
     //=== [ NOTIFY ROLES ] ===//
-    var inserver = this.buttonRole("891648381045325855", {name: "kurama_reading", id: "826430254084128829"}, "Discord Updates", {
+    var inserver = this.buttonRole("891648381045325855", {name: "kurama_reading", id: kuramaEmojis.id('kurama_reading')}, "Discord Updates", {
       description: "Stay tuned for all the news here from our Discord (<#853949428637237278>), so you don't miss a thing!"
     })
-    var wip = this.buttonRole("891649001127022603", {name: "kurama_fixit", id: "826430206487166996"}, "WIP Updates", {
+    var wip = this.buttonRole("891649001127022603", {name: "kurama_fixit", id: kuramaEmojis.id('kurama_fixit')}, "WIP Updates", {
       description: "Keep a close eye on the changes that are coming to our games! Peerks will be sent on a channel that only people with this role can see!"
     })
-    var news = this.buttonRole("891649002985123900", {name: "kurama_thumbsup", id: "826415473969070090"}, "Games News", {
+    var news = this.buttonRole("891649002985123900", {name: "kurama_thumbsup", id: kuramaEmojis.id('kurama_thumbsup')}, "Games News", {
       description: "Receive notifications of all new updates and changes to our games that will be sent out in <#853453645805912094>! Yay, you will like to be informed."
     })
-    var stats = this.buttonRole("891649005954678784", {name: "kurama_fine", id: "869310000768614400"}, "Games Status", {
+    var stats = this.buttonRole("891649005954678784", {name: "kurama_fine", id: kuramaEmojis.id('kurama_fine')}, "Games Status", {
       description: "Don't just hang around without knowing why the server is down, or why you can't log into the server, get notifications of the status of our games!"
     })
 
@@ -131,19 +132,19 @@ module.exports = class RoleButtons {
     
     //=== [ CLASSES ] ===//
     var regionalRoles = this.buttonType(languages, "Regional Roles", 
-      `Choose a region position so you can get better support, talk to people who speak your language, and many others.
+      `Choose a region role so you can get better support, talk to people who speak your language, and many others.
       
-      **Remembering that you cannot have two region positions at the same time! We will do this to avoid confusion.**`,
-      "https://cdn.discordapp.com/emojis/826430254084128829.png",
+      **Remembering that you cannot have two region roles at the same time! We will do this to avoid confusion.**`,
+      kuramaEmojis.text("[[emoji-url:kurama_reading]]"),
       "{emoji} **|** Ready! You will now have access to support in {label}!",
-      "<:kurama_comfy:826415473922539580> **|** Wait a minute, you'll lose access to the support channels, ok... But if you want I'll be here.",
+      kuramaEmojis.text("[[emoji:kurama_comfy]] **|** Wait a minute, you'll lose access to the support channels, ok... But if you want I'll be here."),
       { removeOtherRole: true}
     )
     
     var notifyRoles = this.buttonType(
-      notify, "Notify Roles", null, "https://cdn.discordapp.com/emojis/826430829181141062.png", 
+      notify, "Notify Roles", null, kuramaEmojis.text("[[emoji-url:kurama_lurk]]"), 
       "{emoji} **|** Excellent! Now with {role} you will be notified whenever there is something new!",
-      "<:kurama_sob:826430408173813820> **|** I don't believe! I thought you wanted to see the news, I thought we were friends.. But if you need to, I'll stay here!"
+      kuramaEmojis.text("[[emoji:kurama_sob]] **|** I don't believe! I thought you wanted to see the news, I thought we were friends.. But if you need to, I'll stay here!")
     )
     
     return [

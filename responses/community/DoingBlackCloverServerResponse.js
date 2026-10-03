@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../../src/utils/KuramaEmojis');
 const ServerResponse = require("../../src/structures/serverResponses")
 
 var patterns = [
@@ -23,7 +24,7 @@ module.exports = class DoingBlackCloverServerResponse extends ServerResponse {
     var channelID = message.guild.type == "community" ? client.constants.COMMUNITY_SERVER_BOOST_ID : client.constants.SUPPORT_SERVER_BOOST_ID
     
     message.build(
-      message.kuramaReply(`estamos fazendo sim, o nosso projeto se chama **__Dark Clover__**, se você estiver interessado nele, você pode dar **boost (<#${channelID}>)** aqui ou comprar um vip para ter acesso aos **Chat de Spoilers**.`, "826435905769308240"),
+      message.kuramaReply(`estamos fazendo sim, o nosso projeto se chama **__Dark Clover__**, se você estiver interessado nele, você pode dar **boost (<#${channelID}>)** aqui ou comprar um vip para ter acesso aos **Chat de Spoilers**.`, kuramaEmojis.id('kurama_oi')),
       `{ "option": { "files": ["https://i.imgur.com/Y26wVdm.gif"] } }`
     )
   }

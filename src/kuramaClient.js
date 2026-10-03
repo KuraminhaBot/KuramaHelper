@@ -5,6 +5,7 @@ const { readdirSync } = require('fs')
 module.exports = class kuramaClient{
   constructor(client) {
     this.client = client
+    require('./utils/KuramaEmojis').attach(client)
 
     client.support = client.guilds.cache.get("769892417025212497")
     client.guild = client.guilds.cache.get("417061847489839106")
@@ -17,7 +18,7 @@ module.exports = class kuramaClient{
     client.prefix = process.env.PREFIX
   }
   
-  loadCommands(index = '/app/commands') {
+  loadCommands(index = '/root/KuramaHelper/commands') {
     const cmdFiles = readdirSync(index);
     console.log(`[CMD-LOAD] O total de ${cmdFiles.length} comandos foram carregados!`);
 
@@ -42,7 +43,7 @@ module.exports = class kuramaClient{
     });
   }
 
-  loadEvents(index = '/app/events') {
+  loadEvents(index = '/root/KuramaHelper/events') {
     const evtFiles = readdirSync(index);
     console.log("[EVENTS]", `Carregando o total de ${evtFiles.length} eventos`);
     evtFiles.forEach(f => {
@@ -53,7 +54,7 @@ module.exports = class kuramaClient{
     });
   }
   
-  loadResponses(index = '/app/responses') {
+  loadResponses(index = '/root/KuramaHelper/responses') {
     const cmdFiles = readdirSync(index);
     console.log(`[RESPONSES-LOAD] O total de ${cmdFiles.length} respostas foram carregadas!`);
 
@@ -79,7 +80,7 @@ module.exports = class kuramaClient{
     });
   }
   
-  loadSubCommands(index = '/app/commands-slash') {
+  loadSubCommands(index = '/root/KuramaHelper/commands-slash') {
     const cmdFiles = readdirSync(index);
     var subCommands = []
     
@@ -87,10 +88,10 @@ module.exports = class kuramaClient{
       readdirSync(`${index}/${folder}`).forEach(it => {
         try {
           const props = new (require(`${index}/${folder}/${it}`))(this);
-          if (!props.conf.subCommand) return;
+          if (!props.config.subCommand) return;
           if (props.init) props.init(this.client);
 
-          console.log(`[SUB-COMMAND] Carregando sub commando ${props.conf.command} ${props.help.name}`)
+          console.log(`[SUB-COMMAND] Carregando sub commando ${props.config.command} ${props.help.name}`)
           if (it.split(".").slice(-1)[0] !== "js") return;
           subCommands.push(props)
         } catch(err) {
@@ -102,34 +103,32 @@ module.exports = class kuramaClient{
     this.client.subCommands = subCommands
   }
   
-  async loadSlashs(index = '/app/commands-slash') {
+  async loadSlashs(index = '/root/KuramaHelper/commands-slash') {
     const cmdFiles = readdirSync(index);
-    var commandsConfig = []
-    var devCommands = []
+    var commandsConfig = [], devCommands = []
     
     cmdFiles.forEach(async folder => {
       var files = await readdirSync(`${index}/${folder}`).forEach(async f => {
         try {
           const props = new (require(`${index}/${folder}/${f}`))(this);
           if (f.split(".").slice(-1)[0] !== "js") return;
-          if (props.conf.subCommand) return;
+          if (props.config.subCommand) return;
 
           console.log(`[SLASH-LOADING] Carregando ${props.help.name}.js`);
           await this.client.application?.fetch();
           
+          props.help.category = folder
+          
           if (props.init) props.init(this.client);
-          if (!props.help.options) props.help.options = []
-          if (this.client.subCommands && this.client.subCommands.every(it => it.conf.command == props.help.name)) {
-            await this.client.subCommands.filter(it => it.conf.command == props.help.name).forEach(async (it) => {
+          if (props.config.disable) return;
+          if (this.client.subCommands && this.client.subCommands.find(it => it.config.command == props.help.name)) {
+            await this.client.subCommands.filter(it => it.config.command == props.help.name).forEach(async (it) => {
               props.help.options.push(it.help)
             })
           }
-          if (props.conf.devGuild) {
-            devCommands.push(props.help)
-            props.devCommand = true
-          } else {
-            commandsConfig.push(props.help)
-          }
+          
+          if (props.config.devGuild) devCommands.push(props.data)
+          else commandsConfig.push(props.data)
           
           this.client.slashCommands.set(props.help.name, props);
         } catch (e) {
@@ -142,7 +141,7 @@ module.exports = class kuramaClient{
     this.client.devCommands = devCommands
   }
 
-  loadSystem(index = '/app/src/systems') {
+  loadSystem(index = '/root/KuramaHelper/src/systems') {
     const sytFiles = readdirSync(index);
     console.log("[SYSTEMS]", `Carregando o total de ${sytFiles.length} eventos`);
     sytFiles.forEach(f => {

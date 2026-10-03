@@ -11,18 +11,19 @@ module.exports = async (client, interaction) => {
     guild: interaction.channel.guild || null,
     channel: interaction.channel || null,
     args: this.message ? this.message.content : null,
+    network: interaction.guild.id == client.constants.NATION_GUILD_ID ? "Rede Nation" : "Rede Dark",
     author: interaction.user
   }
   
   if (!cmd) return interaction.ffReply("Acho que isso não é um comando...", "813179670270967819")
 
-  if (cmd.conf.onlyGuilds && !interaction.inGuild()) 
+  if (cmd.config.onlyGuilds && !interaction.inGuild()) 
     return interaction.ffReply("Este comando funciona apenas em servidores.. E infelizmente eu acho que isto não é um servidor", "858430303143591936")
 
-  if (cmd.conf.onlyDevs && !context.author.isDev()) 
+  if (cmd.config.onlyDevs && !context.author.isDev()) 
     return interaction.ffReply("Apenas pessoas especiais podem utilizar este comando", "858430303143591936", {ephemeral: true})
   
-  if (cmd.conf.onlyStaff && !context.author.isStaff())
+  if (cmd.config.onlyStaff && !context.author.isStaff())
     return interaction.ffReply("Apenas pessoas especiais podem utilizar este comando", "858430303143591936", {ephemeral: true})  
 
   if (interaction.isContextMenu()) await interaction.loadTarget()

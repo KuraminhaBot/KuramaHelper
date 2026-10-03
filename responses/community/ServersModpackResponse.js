@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../../src/utils/KuramaEmojis');
 const ServerResponse = require("../../src/structures/serverResponses")
 
 var patterns = [
@@ -21,7 +22,7 @@ module.exports = class ServersModpackResponse extends ServerResponse {
   
   async run(client, message) {    
     message.build(
-      message.kuramaReply(`opa, caso você queira o modpack de algum servidor, você pode tentar utilizar o comando do servidor \`d!(nome do servidor)\` ou ir no **canal de FAQ (<#702190636698435594>)** e clicar no servidor no qual você quer jogar.`, "826430829181141062")
+      message.kuramaReply(`opa, caso você queira o modpack de algum servidor, você pode tentar utilizar o comando do servidor \`d!(nome do servidor)\` ou ir no **canal de FAQ (<#702190636698435594>)** e clicar no servidor no qual você quer jogar.`, kuramaEmojis.id('kurama_lurk'))
     )
   }
 }

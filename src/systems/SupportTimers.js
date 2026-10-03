@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../utils/KuramaEmojis');
 const CronJob = require('cron').CronJob;
 const { checkEmoji } = require('../utils/checkEmoji.js')
 
@@ -29,10 +30,12 @@ module.exports = {
         let supportRole = client.constants.KURAMA_SUPPORT_ID, newsChannel = client.constants.KURAMA_STATUS_ID, context = `no <#${client.constants.SUPPORT_FAQ_CHANNEL_ID}>`
         if (type == "community") supportRole = client.constants.DARK_SUPPORT_ID, newsChannel = client.constants.DARK_ANNOUNCEMENTS_ID, context = "em algum canal de dúvidas frequentes"
         
+        await selfMessages.find(it => it.content.includes("LEIA ANTES DE PERGUNTAR"))?.delete()
+
         channel.build(
-          `${checkEmoji(client, "826414452969963520")} **| LEIA ANTES DE PERGUNTAR!**`,
-          `${checkEmoji(client, "826430829181141062")} **| Se for uma dúvida:** Veja se a resposta da sua pergunta está ${context}! Caso não esteja lá, envie a sua pergunta aqui e, na mensagem, mencione o <@&${supportRole}>, nós iremos tentar te ajudar o mais breve possível!`,
-          `${checkEmoji(client, "826430254084128829")} **| Se você irá perguntar se algo foi alterado/adicionado/removido:** Veja o canal <#${newsChannel}> para saber!`,
+          `${checkEmoji(client, kuramaEmojis.id('kurama_pat_animated'))} **| LEIA ANTES DE PERGUNTAR!**`,
+          `${checkEmoji(client, kuramaEmojis.id('kurama_lurk'))} **| Se for uma dúvida:** Veja se a resposta da sua pergunta está ${context}! Caso não esteja lá, envie a sua pergunta aqui e, na mensagem, mencione o <@&${supportRole}>, nós iremos tentar te ajudar o mais breve possível!`,
+          `${checkEmoji(client, kuramaEmojis.id('kurama_reading'))} **| Se você irá perguntar se algo foi alterado/adicionado/removido:** Veja o canal <#${newsChannel}> para saber!`,
           `{ "option": { "allowedMentions": { "roles": ["769894020654563378"] } } }`
         )
           

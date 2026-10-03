@@ -1,3 +1,4 @@
+const kuramaEmojis = require('./KuramaEmojis');
 const { MessageAttachment, MessageEmbed } = require('discord.js');
 
 module.exports.stackFAQ = async (message, title, channelID) => {
@@ -10,16 +11,27 @@ module.exports.stackFAQ = async (message, title, channelID) => {
   if (message.author.bot && message.author.sytem) return;
   
   if (channel !== null) {
-    var allMessagesInTheChannel = await channel.messages.fetch({ limit: 100 })
-    .then(messages => messages.filter(it => it.author.id !== client.user.id).sort((a, b) => a.createdTimestamp - b.createdTimestamp))
-    
+    var last100MessagesInTheChannel = await channel.messages.fetch({ limit: 100 })
+      .then(messages => messages.filter(it => it.author.id !== client.user.id).sort((a, b) => a.createdTimestamp - b.createdTimestamp))
+      
+    var last200MessagesInTheChannel = await channel.messages.fetch({ limit: 100, before: last100MessagesInTheChannel.first().id })
+      .then(messages => messages.filter(it => it.author.id !== client.user.id).sort((a, b) => a.createdTimestamp - b.createdTimestamp))
+            
+    var olderMessagesInTheChannel = await channel.messages.fetch({ limit: 100, before: last200MessagesInTheChannel.first().id })
+      .then(messages => messages.filter(it => it.author.id !== client.user.id).sort((a, b) => a.createdTimestamp - b.createdTimestamp))
+
+    var allMessagesInTheChannel = last100MessagesInTheChannel
+      .concat(last200MessagesInTheChannel.filter(it => !olderMessagesInTheChannel.has(it.id)))
+      .concat(olderMessagesInTheChannel.filter(it => !last100MessagesInTheChannel.has(it.id)))
+      .filter(it => it.author.id !== client.user.id).sort((a, b) => a.createdTimestamp - b.createdTimestamp)
+
     var selfMessages = await channel.messages.fetch({ limit: 100 })
-    .then(messages => messages.filter(it => it.author.id == client.user.id).sort((a, b) => a.createdTimestamp - b.createdTimestamp))
+      .then(messages => messages.filter(it => it.author.id == client.user.id).sort((a, b) => a.createdTimestamp - b.createdTimestamp))
     
     var embeds = []
     
     let activeEmbed = new MessageEmbed()
-      .setTitle(`<:kurama_coffee:826415473775869962> ${title}`)
+      .setTitle(kuramaEmojis.text(`[[emoji:kurama_coffee]] ${title}`))
       .setColor(`#FF6E02`)
     
     var newText = []

@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../../src/utils/KuramaEmojis');
 const ServerResponse = require("../../src/structures/serverResponses")
 
 var patterns = [
@@ -16,12 +17,12 @@ module.exports = class SellingAccountWarnResponse extends ServerResponse {
   
   async run(client, message) {
     message.build(
-      message.kuramaReply("epa, alguém ai querendo **vender/comprar** contas? Espera ai amigo, antes de comprar qualquer coisa é preciso verificar algumas coisinhas:", "826435905769308240"),
-      message.kuramaReply("**Primeiro de tudo, compre por locais onde você pode abrir disputas ou reembolsar:** Nós recomendamos plataformas como PayPal ou MercadoPago;", "826430829181141062", false),
-      message.kuramaReply("**Peça prints e provas de que a conta realmente pertença a pessoa:** Você pode fazer isso pedindo as pessoas prints dela em jogo, mensagens no chat do servidor e etc;", "826431055161983026", false),
-      message.kuramaReply("**Procure um Administrador para caso você tenha alguma suspeita sobre a compra:** Se a pessoa parecer suspeita, peça ajuda à um administrador antes de comprar;", "826414885659344896", false),
-      message.kuramaReply("**NÃO transfira todo o dinheiro da transação, negocie com pessoas que aceitem a metade do pagamento antes de concluir tudo:** Pague o resto após trocar a conta, e se você estiver vendendo e for roubado por causa disso, peça um Administrador para trocar a senha da sua conta.\n", "826416082012733460", false),
-      message.kuramaReply("Acho que é isso galera, tomem cuidado, beijos do Kuraminha uwu.", "826430829181141062", false)
+      message.kuramaReply("epa, alguém ai querendo **vender/comprar** contas? Espera ai amigo, antes de comprar qualquer coisa é preciso verificar algumas coisinhas:", kuramaEmojis.id('kurama_oi')),
+      message.kuramaReply("**Primeiro de tudo, compre por locais onde você pode abrir disputas ou reembolsar:** Nós recomendamos plataformas como PayPal ou MercadoPago;", kuramaEmojis.id('kurama_lurk'), false),
+      message.kuramaReply("**Peça prints e provas de que a conta realmente pertença a pessoa:** Você pode fazer isso pedindo as pessoas prints dela em jogo, mensagens no chat do servidor e etc;", kuramaEmojis.id('kurama_what'), false),
+      message.kuramaReply("**Procure um Administrador para caso você tenha alguma suspeita sobre a compra:** Se a pessoa parecer suspeita, peça ajuda à um administrador antes de comprar;", kuramaEmojis.id('kurama_knife'), false),
+      message.kuramaReply("**NÃO transfira todo o dinheiro da transação, negocie com pessoas que aceitem a metade do pagamento antes de concluir tudo:** Pague o resto após trocar a conta, e se você estiver vendendo e for roubado por causa disso, peça um Administrador para trocar a senha da sua conta.\n", kuramaEmojis.id('kurama_rage_2'), false),
+      message.kuramaReply("Acho que é isso galera, tomem cuidado, beijos do Kuraminha uwu.", kuramaEmojis.id('kurama_lurk'), false)
     )
   }
 }

@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../utils/KuramaEmojis');
 const CronJob = require('cron').CronJob;
 const { checkEmoji } = require('../utils/checkEmoji.js')
 
@@ -8,7 +9,7 @@ module.exports = {
       var channel = client.channels.cache.get("702148442331283466")
       
       channel.build(
-        `${checkEmoji(client, "826414452969963520")} **|** Um outro dia nasce, staff da Dark, que o hoje seja melhor que o ontem!`
+        `${checkEmoji(client, kuramaEmojis.id('kurama_pat_animated'))} **|** Um outro dia nasce, staff da Dark, que o hoje seja melhor que o ontem!`
       )
     }, null, true, 'America/Sao_Paulo')
     

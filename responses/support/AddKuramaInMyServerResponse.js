@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../../src/utils/KuramaEmojis');
 const ServerResponse = require("../../src/structures/serverResponses")
 
 var patterns = [
@@ -17,13 +18,13 @@ module.exports = class AddKuramaInMyServerResponse extends ServerResponse {
   
   async run(client, message) {
     if (message.content.match("/kuram(a|inha) (helper|canary|rework)/ig")) 
-      return message.ffReply("Infelizmente você não pode adicionar essas minhas versões diferentes, elas são privadas e servem ou para testes ou para funcionamentos dos servidores do Kurama", "826430408173813820")
+      return message.ffReply("Infelizmente você não pode adicionar essas minhas versões diferentes, elas são privadas e servem ou para testes ou para funcionamentos dos servidores do Kurama", kuramaEmojis.id('kurama_sob'))
 
     message.build(
-      message.kuramaReply(`Querendo me adicionar? Para me convidar para o seu servidor é muiitoo simples!`, "826415473969070090"),
-      message.kuramaReply(`Basta digitar o comando \`d!invite\` e clicar no primeiro link da mensagem!`, "826430254084128829", false),
-      message.kuramaReply(`Ou então, você pode me enviar o convite do seu servidor nas mensagens diretas, assim eu irei criar um link para que você me adicione nele!`, "828360789529985066", false),
-      message.kuramaReply(`Se você tiver alguma outra dúvida de como me adicionar, basta mencionar o cargo de Suporte!!`, "869310000768614400", false)
+      message.kuramaReply(`Querendo me adicionar? Para me convidar para o seu servidor é muiitoo simples!`, kuramaEmojis.id('kurama_thumbsup')),
+      message.kuramaReply(`Basta digitar o comando \`d!invite\` e clicar no primeiro link da mensagem!`, kuramaEmojis.id('kurama_reading'), false),
+      message.kuramaReply(`Ou então, você pode me enviar o convite do seu servidor nas mensagens diretas, assim eu irei criar um link para que você me adicione nele!`, kuramaEmojis.id('kurama_analise'), false),
+      message.kuramaReply(`Se você tiver alguma outra dúvida de como me adicionar, basta mencionar o cargo de Suporte!!`, kuramaEmojis.id('kurama_fine'), false)
     )
   }
 }

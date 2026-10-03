@@ -37,8 +37,6 @@ module.exports = class SlashCommands {
       options: this.help.options,
       type: this.help.type
     }
-    
-    this.conf = this.config
   }
   
   getSubCommand(interaction) {
@@ -46,7 +44,7 @@ module.exports = class SlashCommands {
   }
   
   getBaseCommand(interaction) {
-    return this.client.slashCommands.get(this.conf.command)
+    return this.client.slashCommands.get(this.config.command)
   }
   
   getLinkButton(url, t, item="link", emoji) {

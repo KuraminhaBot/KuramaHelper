@@ -4,22 +4,25 @@
   "description": "Um bot para ajudar os servidores do Kuraminha em diversas funções!",
   "main": "app.js",
   "dependencies": {
-    "discord-logs": "^2.0.1",
+    "cron": "^1.8.2",
+    "discord-logs": "2.0.1",
     "discord.js": "^13.2.0",
     "dotenv": "^8.2.0",
-    "fs": "^0.0.2",
-    "cron": "^1.8.2",
-    "node-cron": "^3.0.0",
     "extract-colors": "^1.1.17",
+    "fs": "^0.0.2",
     "humanize-duration": "^3.27.0",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
-    "npm": "^7.19.0"
+    "node-cron": "^3.0.0",
+    "npm": "^7.19.0",
+    "openai": "^4.26.0"
   },
   "engines": {
     "node": "16.x"
   },
   "scripts": {
+    "sync:public:preview": "node scripts/sync-public.cjs",
+    "sync:public": "node scripts/sync-public.cjs --apply",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,3 +1,4 @@
+const kuramaEmojis = require('../../src/utils/KuramaEmojis');
 const { MessageEmbed, MessageAttachment, MessageButton, MessageActionRow } = require('discord.js');
 const { kuramaTimeNow, formatDate, getRelativeTime } = require('../../src/utils/timeUtils.js')
 const { checkEmoji } = require('../../src/utils/checkEmoji.js')
@@ -15,7 +16,7 @@ module.exports = {
     
     var code = args.join(" "), evaled, originalEval, guild = message.guild, channel = message.channel, author = message.author, bot = client.user
     if (message.author !== client.owner) return message.ffReply("apenas pessoas especiais podem utilizar esse comando :3", "849638419885195324");
-    if (!code) return message.ffReply('Está faltando os argumentos, esqueceu disso?', "826415473775869962")
+    if (!code) return message.ffReply('Está faltando os argumentos, esqueceu disso?', kuramaEmojis.id('kurama_coffee'))
     if (!code.includes("return") && code.includes("await")) code = `return ${code}`
     
     process.env.TOKEN = "[Secret Token]"

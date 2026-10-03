@@ -14,8 +14,8 @@ module.exports = {
     
     var cmd = subCommand ?  
         (subGroup ? 
-         client.groupCommands.find(it => it.conf.command == command && it.conf?.subCommandGroup == subGroup && it.help.name == subCommand) :
-         client.subCommands.find(it => it.help.name == subCommand && it.conf.command === command)) : 
+         client.groupCommands.find(it => it.config.command == command && it.config?.subCommandGroup == subGroup && it.help.name == subCommand) :
+         client.subCommands.find(it => it.help.name == subCommand && it.config.command === command)) : 
         client.slashCommands.get(command)
     
     var context = {

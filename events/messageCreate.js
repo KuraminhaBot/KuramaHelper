@@ -1,15 +1,16 @@
+const kuramaEmojis = require('../src/utils/KuramaEmojis');
 module.exports = async (client, message) => {
   
   let prefix = process.env.PREFIX, type = false
 
-  if (message.guild && !message.guild.me.permissionsIn(message.channel).has(["SEND_MESSAGES", "VIEW_CHANNEL"])) return;
+  if (message.guild && !message.guild.me.permissionsIn(message.channel)?.has(["SEND_MESSAGES", "VIEW_CHANNEL"])) return;
   if (message.author.bot || message.author.system) return;
   
   if (message.content === `${prefix}restart` && message.author.id === '361977144445763585') {
-    await message.ffSend(`Reiniciando! Recarregando todos os meus comandos.`, "826413426100011028")
+    await message.ffSend(`Reiniciando! Recarregando todos os meus comandos.`, kuramaEmojis.id('kurama_yay'))
       .then(message => client.destroy()).catch(err => console.log(err))
       .then(() => client.login(process.env.AUTH_TOKEN)).catch(err => console.log(err))
-      .then(() => message.ffSend(`Voltei! Iniciado com ${client.users.cache.size} usuários, em ${client.channels.cache.size} canais, em ${client.guilds.cache.size} servidores.`, "826414452969963520")).catch(err => console.log(err));
+      .then(() => message.ffSend(`Voltei! Iniciado com ${client.users.cache.size} usuários, em ${client.channels.cache.size} canais, em ${client.guilds.cache.size} servidores.`, kuramaEmojis.id('kurama_pat_animated'))).catch(err => console.log(err));
     console.log('[RESTART] Desconectando - Processo forçado pelo dono.');
     process.exit();
   }

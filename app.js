@@ -4,7 +4,8 @@ require('./src/structures/ProtoTypes').start()
 const Discord = require('discord.js');
 const kuramaClient = require('./src/kuramaClient.js')
 const client = new Discord.Client({ 
-  intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_PRESENCES', 'GUILD_MEMBERS'] 
+  // Temporário: usar apenas intents não privilegiadas até a aprovação do Discord.
+  intents: ['GUILDS', 'GUILD_MESSAGES']
 })
 
 const Constants = require("./src/utils/Constants")
@@ -24,8 +25,8 @@ require('discord-logs')(client);
 const kurama = new kuramaClient(client)
   kurama.loadEvents()
   kurama.loadCommands()
-  kurama.loadSlashs()
   kurama.loadSubCommands()
+  kurama.loadSlashs()
   kurama.loadResponses()
   kurama.loadSystem()
 
