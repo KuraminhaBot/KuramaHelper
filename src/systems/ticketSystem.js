@@ -31,7 +31,7 @@ module.exports = {
         
         var serverType = this.ticketConfig(client, interaction.guildId); 
         
-        var serverInfo = serverType.find(it => it.value.includes(server))
+        var serverInfo = serverType?.find(it => it.value.includes(server))
         var thread = await require('./ticketSystem.js').createTicket(client, interaction, "🚓")
       
         thread.send([
