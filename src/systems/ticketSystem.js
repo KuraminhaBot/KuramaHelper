@@ -12,9 +12,10 @@ module.exports = {
         switch (interaction.customId.split(":")[2]) {
           case 'supportKurama':
             var thread = await require('./ticketSystem.js').createTicket(client, interaction)
+            if (!thread || typeof thread.send !== 'function') return;
             var roleID = client.constants.KURAMA_SUPPORT.find(it => it.value == "SUPPORT").roleID
   
-            thread.send([
+            await thread.send([
               `${checkEmoji(client, kuramaEmojis.id('kurama_fine'))} **|** ${interaction.user.toString()} Prontinho! Eu criei um ticket para você, faça sua pergunta e aguarde até que um membro da equipe venha tirar sua dúvida.`,
               `${checkEmoji(client, kuramaEmojis.id('kurama_analise'))} **|** Faça sua pergunta de uma forma simples e objetiva, se você precisar, anexe imagens. Para que os <@&${roleID}> possam te ajudar com mais eficiência.`,
               `${checkEmoji(client, kuramaEmojis.id('kurama_clown'))} **|** Eu espero muito que você tenha **LIDO o nosso canal <#769900882887180288> antes de criar este ticket**. **Lá estão as respostas para as perguntas mais comuns**!`,
@@ -27,14 +28,23 @@ module.exports = {
 
     if (interaction.isSelectMenu()) {
       if (interaction.values.includes('create')) {
-        var server = client.utils.arrayRemove(interaction.values, "create")
+        var selectedServers = interaction.values.filter(value => value !== "create")
         
         var serverType = this.ticketConfig(client, interaction.guildId); 
         
-        var serverInfo = serverType?.find(it => it.value.includes(server))
+        if (!Array.isArray(serverType)) {
+          return interaction.ffReply("O suporte não está configurado para este servidor. Avise a administração para verificar a configuração do bot.", false, false, {ephemeral: true})
+        }
+        var serverInfo = selectedServers.length === 1
+          ? serverType.find(it => it.value === selectedServers[0])
+          : undefined
+        if (!serverInfo?.mentionRole) {
+          return interaction.ffReply("Esta opção de ticket não está mais disponível. Selecione um servidor válido; se a opção continuar aparecendo, peça à administração para atualizar o menu de tickets.", false, false, {ephemeral: true})
+        }
         var thread = await require('./ticketSystem.js').createTicket(client, interaction, "🚓")
+        if (!thread || typeof thread.send !== 'function') return;
       
-        thread.send([
+        await thread.send([
           `${checkEmoji(client, kuramaEmojis.id('kurama_fine'))} **|** ${interaction.user.toString()} Prontinho! Eu criei um ticket para você, coloque todos os dados e aguarde até que um membro da equipe venha tirar sua dúvida.`,
           `${checkEmoji(client, kuramaEmojis.id('kurama_analise'))} **|** Envie as provas do ocorrido, se você precisar, anexe imagens. Para que os <@&${serverInfo.mentionRole}> possam te ajudar com mais eficiência.`,
           `${checkEmoji(client, kuramaEmojis.id('kurama_blush'))} **|** Após o final do report ou se por algum motivo você quiser fechar o ticket, você pode utilizar \`/closeticket\` para arquivar esta thread.`
