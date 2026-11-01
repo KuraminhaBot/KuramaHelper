@@ -43,10 +43,10 @@ var Constants = {
   ],
   "NATION_SERVERS": [
     { "value": "DISCORD", "name": "Discord", "roleID": "551811900619358227", "mentionRole": "646456088824250379", "ip": null, "server": false },
-    { "value": "NONATION", "name": "NONation", "roleID": "477288619309006878", "mentionRole": "365186385323360267", "ip": "naruto.rededarkmc.com", "server": true },
+    { "value": "NONATION", "name": "NONation", "roleID": "477288619309006878", "mentionRole": "365186385323360267", "ip": "naruto.nationmc.com.br", "server": true },
     { "value": "DBNATION", "name": "DBNation", "roleID": "229385075664355328", "mentionRole": "365186512998105091", "ip": "db.nationmc.com.br", "server": true },
     { "value": "7DSNATION", "name": "7DSNation", "roleID": "521822791373291540", "mentionRole": "472578251060150294", "ip": "7ds.nationmc.com.br", "server": true },
-    { "value": "POKENATION", "name": "PokeNation", "roleID": "477288044261802005", "mentionRole": "365186566651379722", "ip": "pokenationbr.com", "server": true }
+    { "value": "POKENATION", "name": "PokeNation", "roleID": "477288044261802005", "mentionRole": "365186566651379722", "ip": "poke.nationmc.com.br", "server": true }
   ],
   "KURAMA_SUPPORT": [
     { "value": "SUPPORT", "name": "Suporte", "roleID": "769895028863664160", "mentionRole": "769895028863664160" },
