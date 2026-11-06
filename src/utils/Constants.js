@@ -38,7 +38,7 @@ var Constants = {
     { "value": "NNTDARK", "name": "Nanatsu Dark", "roleID": "542457426746671156", "mentionRole": "552803751870857217", "ip": "nnt.rededarkmc.com", "server": true },
     { "value": "DSDARK", "name": "Demon Slayer Dark", "roleID": "678025839635595264", "mentionRole": "678744351408521218", "ip": "ds.rededarkmc.com", "server": true },
     { "value": "DBCDARK", "name": "Dragon Ball Dark", "roleID": "514824671472910366", "mentionRole": "526809359674507264", "ip": "db.rededarkmc.com", "server": true },
-//    { "value": "OPDARK", "name": "One Piece Dark", "roleID": "1158905334593749053", "mentionRole": "", "ip": "op.rededarkmc.com", "server": true }
+    { "value": "OPDARK", "name": "One Piece Dark", "roleID": "1158905334593749053", "mentionRole": "1347828042810003456", "ip": "op.rededarkmc.com", "server": true }
 //    { value: "SAODARK", name: "Sword Dark Online", roleID: "1096817423249842276", ip: "aincrad.com.br", server: true },
   ],
   "NATION_SERVERS": [
@@ -77,6 +77,11 @@ var Constants = {
       "name": "Demon Slayer Dark",
       "ip": "dsp.rededarkmc.com",
       "modpack": "https://distro.rededarkmc.com/files/dsdark-pojav.zip"
+    },
+    "OPDARK": {
+      "name": "One Piece Dark",
+      "ip": "opp.rededarkmc.com",
+      "modpack": "https://toppixelmon.com/modpacks.html"
     }
   }
 }
